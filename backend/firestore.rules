@@ -1,0 +1,113 @@
+rules_version = '2';
+// Data model: diaryVaults/{Auth UID} is an encrypted vault header.
+// Header: version=1, iterations=600000, salt(base64 24), iv(base64 16),
+// revision(UUID 36), count(1..12), createdAt(immutable), updatedAt(server time).
+// parts/{0..11}: revision(UUID 36), index(int), ciphertext(base64 <=700000).
+// No names, emails, dates, roles, or plaintext diary content are stored here.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuthenticated() { return request.auth != null && request.auth.token.firebase.sign_in_provider == 'google.com'; }
+    function isOwner(uid) { return isAuthenticated() && request.auth.uid == uid; }
+    function isRevision(v) { return v is string && v.size() == 36 && v.matches('^[a-f0-9-]{36}$'); }
+    function isValidVault(d) {
+      return d.keys().hasAll(['version','iterations','salt','iv','revision','count','createdAt','updatedAt']) &&
+        d.keys().hasOnly(['version','iterations','salt','iv','revision','count','createdAt','updatedAt']) &&
+        d.version is int && d.version == 1 && d.iterations is int && d.iterations == 600000 &&
+        d.salt is string && d.salt.size() == 24 && d.salt.matches('^[A-Za-z0-9+/]{22}==$') &&
+        d.iv is string && d.iv.size() == 16 && d.iv.matches('^[A-Za-z0-9+/]{16}$') &&
+        isRevision(d.revision) && d.count is int && d.count >= 1 && d.count <= 12 &&
+        d.createdAt is timestamp && d.updatedAt is timestamp && d.updatedAt == request.time;
+    }
+    function isValidPart(uid, partId, d) {
+      let header = getAfter(/databases/$(database)/documents/diaryVaults/$(uid)).data;
+      return d.keys().hasAll(['revision','index','ciphertext']) && d.keys().hasOnly(['revision','index','ciphertext']) &&
+        isRevision(d.revision) && d.revision == header.revision &&
+        d.index is int && d.index >= 0 && d.index < header.count && partId == string(d.index) &&
+        d.ciphertext is string && d.ciphertext.size() >= 1 && d.ciphertext.size() <= 700000 &&
+        d.ciphertext.matches('^[A-Za-z0-9+/]+={0,2}$');
+    }
+    match /diaryVaults/{uid} {
+      allow get: if isOwner(uid);
+      allow list, delete: if false;
+      allow create: if isOwner(uid) && isValidVault(request.resource.data) && request.resource.data.createdAt == request.time;
+      allow update: if isOwner(uid) && isValidVault(request.resource.data) &&
+        request.resource.data.createdAt == resource.data.createdAt && request.resource.data.salt == resource.data.salt &&
+        request.resource.data.revision != resource.data.revision;
+      match /parts/{partId} {
+        allow get: if isOwner(uid);
+        allow list: if false;
+        allow create, update: if isOwner(uid) && isValidPart(uid, partId, request.resource.data);
+        allow delete: if isOwner(uid) && (!exists(/databases/$(database)/documents/diaryVaults/$(uid)/parts/$(partId)) ||
+          resource.data.index >= getAfter(/databases/$(database)/documents/diaryVaults/$(uid)).data.count);
+      }
+    }
+    // Public feedback contains only body and createdAt. No Auth UID or profile.
+    // Private writer/quota records contain synthetic identifiers and timestamps.
+    function feedbackAnonymous() {
+      return request.auth != null && request.auth.token.firebase.sign_in_provider == 'anonymous';
+    }
+    function feedbackLocation(d) {
+      return d.hubId is string && d.hubId.matches('^issue-[1-9][0-9]{0,8}$') &&
+        d.commentId is string && d.commentId.matches('^[a-f0-9-]{36}$');
+    }
+    function feedbackNewComment(d) {
+      return feedbackLocation(d) &&
+        !exists(/databases/$(database)/documents/teacherHubFeedback/$(d.hubId)/comments/$(d.commentId)) &&
+        getAfter(/databases/$(database)/documents/teacherHubFeedback/$(d.hubId)/comments/$(d.commentId)).data.createdAt == request.time;
+    }
+    function validFeedback(d) {
+      return d.keys().hasAll(['body','createdAt']) && d.keys().hasOnly(['body','createdAt']) &&
+        d.body is string && d.body.size() >= 2 && d.body.size() <= 500 &&
+        !d.body.matches('^[ \\t\\r\\n]*$') &&
+        !d.body.matches('(?s).*[<>\\x00-\\x08\\x0b-\\x1f\\x7f\\x{202a}-\\x{202e}\\x{2066}-\\x{2069}].*') &&
+        !d.body.matches('(?si).*[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}.*') &&
+        !d.body.matches('(?s).*(01[016789]|0[2-6][1-5]?)[ -]?[0-9]{3,4}[ -]?[0-9]{4}.*') &&
+        !d.body.matches('(?s).*[0-9]{6}[ -]?[1-4][0-9]{6}.*') &&
+        !d.body.matches('(?si).*(https?://|www\\.|(api[_ -]?key|access[_ -]?token|password|비밀번호)[ ]*[:=]).*') &&
+        d.createdAt is timestamp && d.createdAt == request.time;
+    }
+    function feedbackPaired(hubId,commentId) {
+      let writer = getAfter(/databases/$(database)/documents/teacherHubFeedbackWriters/$(request.auth.uid)).data;
+      let quota = getAfter(/databases/$(database)/documents/teacherHubFeedbackQuota/global).data;
+      return writer.hubId == hubId && writer.commentId == commentId && writer.updatedAt == request.time &&
+        quota.hubId == hubId && quota.commentId == commentId && quota.updatedAt == request.time;
+    }
+    function validFeedbackWriter(d) {
+      return d.keys().hasAll(['hubId','commentId','updatedAt']) && d.keys().hasOnly(['hubId','commentId','updatedAt']) &&
+        d.updatedAt is timestamp && d.updatedAt == request.time && feedbackNewComment(d);
+    }
+    function validFeedbackQuota(d) {
+      return d.keys().hasAll(['hubId','commentId','updatedAt','windowStart','count']) &&
+        d.keys().hasOnly(['hubId','commentId','updatedAt','windowStart','count']) &&
+        d.updatedAt is timestamp && d.updatedAt == request.time &&
+        d.windowStart is timestamp && d.count is int && d.count >= 1 && d.count <= 100 && feedbackNewComment(d);
+    }
+    match /teacherHubFeedback/{hubId}/comments/{commentId} {
+      allow get: if hubId.matches('^issue-[1-9][0-9]{0,8}$');
+      allow list: if hubId.matches('^issue-[1-9][0-9]{0,8}$') && request.query.limit != null && request.query.limit >= 1 && request.query.limit <= 21;
+      allow create: if feedbackAnonymous() && hubId.matches('^issue-[1-9][0-9]{0,8}$') &&
+        commentId.matches('^[a-f0-9-]{36}$') && validFeedback(request.resource.data) && feedbackPaired(hubId,commentId);
+      allow update, delete: if false;
+    }
+    match /teacherHubFeedbackWriters/{uid} {
+      allow get: if feedbackAnonymous() && request.auth.uid == uid;
+      allow list, delete: if false;
+      allow create: if feedbackAnonymous() && request.auth.uid == uid && validFeedbackWriter(request.resource.data);
+      allow update: if feedbackAnonymous() && request.auth.uid == uid && validFeedbackWriter(request.resource.data) &&
+        request.time - resource.data.updatedAt >= duration.value(60, 's');
+    }
+    match /teacherHubFeedbackQuota/global {
+      allow get: if feedbackAnonymous();
+      allow list, delete: if false;
+      allow create: if feedbackAnonymous() && validFeedbackQuota(request.resource.data) &&
+        request.resource.data.count == 1 && request.resource.data.windowStart == request.time;
+      allow update: if feedbackAnonymous() && validFeedbackQuota(request.resource.data) &&
+        ((request.time - resource.data.windowStart < duration.value(3600, 's') &&
+          request.resource.data.windowStart == resource.data.windowStart && request.resource.data.count == resource.data.count + 1) ||
+        (request.time - resource.data.windowStart >= duration.value(3600, 's') &&
+          request.resource.data.windowStart == request.time && request.resource.data.count == 1));
+    }
+
+    match /{document=**} { allow read, write: if false; }
+  }
+}

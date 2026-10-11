@@ -32,7 +32,7 @@ try{
   await page.locator('#copy-prompt').click();await page.waitForFunction(()=>document.getElementById('copy-status').textContent!=='');check('copy success or manual fallback available',await page.locator('#copy-status').innerText()!=='');
   const seed=JSON.parse(await readFile(new URL('../data/hubs.json',import.meta.url),'utf8'))[0];
   if(!seed)throw new Error('Browser test requires populated registry');
-  const sample=Array.from({length:7},(_,i)=>({...seed,id:`sample-${i}`,title:`합성 허브 ${i+1}`,url:`https://sample.github.io/tools-${i}/`,symbol:['sun','moon','star','book','compass'][i%5]}));
+  const sample=Array.from({length:7},(_,i)=>({...seed,id:`issue-${i+1}`,issue:i+1,title:`합성 허브 ${i+1}`,url:`https://sample.github.io/tools-${i}/`,symbol:['sun','moon','star','book','compass'][i%5]}));
   await page.route('**/hubs.json',route=>route.fulfill({json:sample}));await page.setViewportSize({width:1536,height:1050});await page.reload();await page.waitForSelector('.hub-card:not(.invitation)');check('additional cards extend into new rows',await page.locator('.hub-card:not(.invitation)').count()===7);await screenshot('synthetic-grid');
   await page.route('**/hubs.json',route=>route.fulfill({json:[{...seed,url:'javascript:alert(1)'}]}));await page.reload();check('unsafe manifest fails closed',await page.locator('#load-error').isVisible());
   check('no runtime errors',errors.length===0);check('no external resource requests',external.length===0);

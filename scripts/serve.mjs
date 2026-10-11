@@ -1,7 +1,7 @@
 import http from 'node:http';
 import { readFile } from 'node:fs/promises';
 const root = new URL('../site/', import.meta.url);
-const files = new Map([['index.html','text/html; charset=utf-8'], ['styles.css','text/css; charset=utf-8'], ['app.mjs','text/javascript; charset=utf-8'], ['art.svg','image/svg+xml'], ['hubs.json','application/json; charset=utf-8']]);
+const files = new Map([['index.html','text/html; charset=utf-8'], ['styles.css','text/css; charset=utf-8'], ['app.mjs','text/javascript; charset=utf-8'], ['art.svg','image/svg+xml'], ['hubs.json','application/json; charset=utf-8'], ['feedback-config.json','application/json; charset=utf-8'], ['feedback-client.mjs','text/javascript; charset=utf-8'], ['feedback-view.mjs','text/javascript; charset=utf-8'], ['feedback-validation.mjs','text/javascript; charset=utf-8']]);
 const server = http.createServer(async (req, res) => {
   const name = req.url === '/' ? 'index.html' : req.url?.slice(1);
   if (req.method !== 'GET' || !files.has(name)) { res.writeHead(404); res.end(); return; }
