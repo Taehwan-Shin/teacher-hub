@@ -17,7 +17,7 @@ GitHub 연결이나 Issue 생성 권한이 없으면 신청용 JSON을 작성하
 운영자 승인 후 게시된다는 점을 알려 줘.`;
 byId('prompt').textContent = prompt;
 byId('copy-prompt').addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(prompt); byId('copy-status').textContent='복사했습니다. 허브 정보를 채워 Codex에 붙여넣으세요.'; }
+  try { await Promise.race([navigator.clipboard.writeText(prompt),new Promise((_,reject)=>setTimeout(()=>reject(new Error('timeout')),3000))]); byId('copy-status').textContent='복사했습니다. 허브 정보를 채워 Codex에 붙여넣으세요.'; }
   catch { byId('copy-status').textContent='자동 복사를 사용할 수 없습니다. 아래 프롬프트를 펼쳐 직접 복사하세요.'; document.querySelector('details').open=true; }
 });
 function element(tag, cls, content) { const e=document.createElement(tag); if(cls)e.className=cls;if(content!==undefined)e.textContent=content;return e; }

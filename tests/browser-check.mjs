@@ -29,7 +29,7 @@ try{
   await page.getByRole('button',{name:'전체',exact:true}).click();
   for(const [width,columns] of [[1100,4],[850,3],[390,2],[360,1]]){await page.setViewportSize({width,height:900});check(`responsive ${width}px ${columns} columns`,await page.locator('.card-grid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length)===columns);check(`no horizontal overflow ${width}px`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
   await page.setViewportSize({width:390,height:900});await screenshot('mobile');
-  await page.locator('#copy-prompt').click();check('copy success or manual fallback available',await page.locator('#copy-status').innerText()!=='');
+  await page.locator('#copy-prompt').click();await page.waitForFunction(()=>document.getElementById('copy-status').textContent!=='');check('copy success or manual fallback available',await page.locator('#copy-status').innerText()!=='');
   const seed=JSON.parse(await readFile(new URL('../data/hubs.json',import.meta.url),'utf8'))[0];
   if(!seed)throw new Error('Browser test requires populated registry');
   const sample=Array.from({length:7},(_,i)=>({...seed,id:`sample-${i}`,title:`합성 허브 ${i+1}`,url:`https://sample.github.io/tools-${i}/`,symbol:['sun','moon','star','book','compass'][i%5]}));
