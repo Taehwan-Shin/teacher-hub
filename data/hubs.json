@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "issue-1",
+    "title": "교실 도구 허브",
+    "description": "교실 타이머, PDF 검사, 다항식 숲 탐험. 수업에 필요한 작은 도구들을 한곳에서 만나세요.",
+    "url": "https://taehwan-shin.github.io/classroom-hub/",
+    "category": "수업 도구",
+    "symbol": "sun",
+    "issue": 1
+  }
+]
