@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 등록 안내와 개인정보 주의사항
+    url: https://github.com/Taehwan-Shin/teacher-hub/blob/main/CONTRIBUTING.md
+    about: 신청서는 공개됩니다. 신청 전에 안내를 읽어주세요.

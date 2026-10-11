@@ -1,0 +1,5 @@
+site/hubs.json
+qa/
+.local/
+node_modules/
+*.log
