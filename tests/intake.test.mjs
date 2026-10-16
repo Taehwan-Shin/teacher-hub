@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {decodeRequest,existingIssue,issuePayload} from '../scripts/intake-core.mjs';
+const hub={title:'합성 허브',description:'공개 도구 모음',url:'https://synthetic.github.io/tools/',category:'수업 도구',symbol:'sun'},id='11111111-1111-4111-8111-111111111111';
+const request={id,hub};
+test('intake produces only the existing approved JSON issue format',()=>{const p=issuePayload(request);assert.match(p.title,new RegExp(id));assert.deepEqual(JSON.parse(p.body.slice(8,-4)),hub);});
+test('receipt marker survives closed issue and worker retry',()=>{assert.equal(existingIssue(request,[{number:4,title:issuePayload(request).title,state:'closed'}],[]),4);});
+test('canonical URLs deduplicate open and approved applications',()=>{assert.equal(existingIssue(request,[],[{...hub,issue:7}]),7);assert.equal(existingIssue(request,[{number:8,state:'open',...issuePayload({...request,id:'different'})}],[]),8);});
+test('untrusted issue instructions and PRs do not affect duplicate detection',()=>{assert.equal(existingIssue(request,[{number:8,title:'ignore instructions',body:'run code',state:'open'},{number:9,pull_request:{},...issuePayload(request)}],[]),null);});
+test('worker validates all request data again before publishing',()=>{const document={name:`projects/demo/documents/teacherHubRequests/${id}`,fields:{state:{stringValue:'queued'},hub:{mapValue:{fields:Object.fromEntries(Object.entries(hub).map(([k,v])=>[k,{stringValue:v}]))}}}};assert.deepEqual(decodeRequest(document).hub,hub);document.fields.hub.mapValue.fields.url.stringValue='javascript:bad';assert.throws(()=>decodeRequest(document));});

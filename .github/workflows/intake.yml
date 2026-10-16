@@ -1,0 +1,29 @@
+name: 등록 접수 처리
+on:
+  schedule:
+    - cron: '7,17,27,37,47,57 * * * *'
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: registration-intake
+  cancel-in-progress: false
+jobs:
+  intake:
+    if: github.repository == 'Taehwan-Shin/teacher-hub' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          persist-credentials: false
+      - name: 접수 클라이언트와 데이터 검증 준비
+        run: node scripts/build.mjs
+      - name: 대기 신청을 Issue로 전환
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INTAKE_REFRESH_TOKEN: ${{ secrets.INTAKE_REFRESH_TOKEN }}
+        run: node scripts/intake-worker.mjs

@@ -6,6 +6,14 @@
 - 등록 안내와 공유 프롬프트: [CONTRIBUTING.md](CONTRIBUTING.md)
 - 등록 요청: https://github.com/Taehwan-Shin/teacher-hub/issues
 
+## Codex 한 번으로 등록 신청
+
+배포된 허브 프로젝트를 Codex에서 열고 사이트의 **등록 프롬프트 복사** 내용을 붙여넣습니다. Codex가 공개 허브 정보를 확인해 Firebase에 접수하고 접수 번호·추적 링크를 안내합니다. 선생님의 GitHub Issue 생성 권한이나 브라우저 제출은 필요하지 않습니다. 배포 주소·정보가 없거나 실행 환경이 네트워크 승인을 요구하면 확인 단계가 생길 수 있습니다.
+
+GitHub Actions의 **등록 접수 처리**가 약 10분 간격으로 대기 신청을 Issue로 전환합니다. GitHub 사정에 따른 지연·누락이 가능하며, 접수 즉시 카드가 게시되지는 않습니다. 이후 승인 절차는 아래와 같습니다. 상세 클라이언트 실행 방법은 [REGISTRATION_API.md](REGISTRATION_API.md)를 확인하세요.
+
+자동 처리 실패 시 Actions에서 **등록 접수 처리 → Run workflow**를 실행합니다. 공개 저장소의 예약 실행은 장기간 활동이 없으면 GitHub가 비활성화할 수 있으므로 운영자가 상태를 확인해야 합니다. 등록 처리용 Firebase Secret 교체·중단 절차는 [backend/README.md](backend/README.md)에 있습니다.
+
 ## 등록 승인
 
 1. Issues에서 허브 등록 요청을 엽니다.

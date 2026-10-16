@@ -1,4 +1,5 @@
 site/hubs.json
+site/registration-validation.mjs
 qa/
 .local/
 node_modules/

@@ -5,21 +5,17 @@ const symbols = ['sun','moon','star','book','compass'];
 const names = {sun:'THE SUN',moon:'THE MOON',star:'THE STAR',book:'THE BOOK',compass:'THE COMPASS'};
 let hubs = [], category = '전체';
 const byId = id => document.getElementById(id);
-const prompt = `이 GitHub 저장소의 CONTRIBUTING.md 등록 안내를 읽고 내 웹앱 허브의 등록 요청 Issue를 생성해 줘.
-저장소: https://github.com/Taehwan-Shin/teacher-hub
-허브 이름: [공개할 허브 이름]
-소개: [160자 이내 공개 소개]
-허브 주소: [쿼리·해시 없는 공개 HTTPS 주소]
-분류: [수업 도구 / 교과 학습 / 학급 운영 / 창작 활동 / 종합 허브 중 하나]
-카드 문양: [sun / moon / star / book / compass 중 하나]
-실명·학교·연락처·학생 정보·토큰은 입력하지 마.
-신청 본문에는 안내에 맞는 JSON 코드 블록 하나만 넣어 줘.
-저장소 파일이나 코드를 변경하지 말고 승인 라벨도 붙이지 마.
-GitHub 연결이나 Issue 생성 권한이 없으면 신청용 JSON을 작성하고 직접 신청 링크를 안내해 줘.
-운영자 승인 후 게시된다는 점을 알려 줘.`;
+const prompt = `현재 프로젝트의 웹앱 허브를 ‘교사의 별자리’ 전체 허브에 등록 신청해줘.
+등록 안내: https://github.com/Taehwan-Shin/teacher-hub/blob/main/REGISTRATION_API.md
+위 안내를 공개 HTTP로 읽고, 현재 프로젝트에서 허브 이름·소개·실제 공개 배포 주소를 확인해줘. 확인되지 않은 정보는 추측하지 말고 질문해줘.
+분류는 수업 도구/교과 학습/학급 운영/창작 활동/종합 허브, 문양은 sun/moon/star/book/compass 중 골라줘.
+개인정보·학생 정보·비공개 주소·인증 정보는 제외하고 공개할 허브 정보만 전송해줘.
+정보가 준비되어 있으면 안내의 공개 접수 클라이언트 코드를 확인한 뒤 임시 폴더에서 실행해 Firebase에 신청을 접수해줘. 이 프롬프트는 해당 공개 정보의 등록 신청 전송을 허용한다.
+GitHub 연결 앱으로 Issue를 직접 생성하지 말고, 프로젝트 소스·저장소 파일·승인 라벨을 변경하지 마.
+접수 번호와 추적 링크를 알려줘. 접수 후 GitHub Actions가 주기적으로 Issue를 만들고 운영자가 승인하면 카드가 게시된다는 점을 안내해줘. 오류가 나면 성공했다고 말하거나 접수를 반복하지 말고 원인과 접수 번호를 알려줘.`;
 byId('prompt').textContent = prompt;
 byId('copy-prompt').addEventListener('click', async () => {
-  try { await Promise.race([navigator.clipboard.writeText(prompt),new Promise((_,reject)=>setTimeout(()=>reject(new Error('timeout')),3000))]); byId('copy-status').textContent='복사했습니다. 허브 정보를 채워 Codex에 붙여넣으세요.'; }
+  try { await Promise.race([navigator.clipboard.writeText(prompt),new Promise((_,reject)=>setTimeout(()=>reject(new Error('timeout')),3000))]); byId('copy-status').textContent='복사했습니다. 웹앱 허브 프로젝트의 Codex에 붙여넣으세요.'; }
   catch { byId('copy-status').textContent='자동 복사를 사용할 수 없습니다. 아래 프롬프트를 펼쳐 직접 복사하세요.'; document.querySelector('details').open=true; }
 });
 function element(tag, cls, content) { const e=document.createElement(tag); if(cls)e.className=cls;if(content!==undefined)e.textContent=content;return e; }
