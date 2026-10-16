@@ -88,14 +88,17 @@ service cloud.firestore {
       allow list: if hubId.matches('^issue-[1-9][0-9]{0,8}$') && request.query.limit != null && request.query.limit >= 1 && request.query.limit <= 21;
       allow create: if feedbackAnonymous() && hubId.matches('^issue-[1-9][0-9]{0,8}$') &&
         commentId.matches('^[a-f0-9-]{36}$') && validFeedback(request.resource.data) && feedbackPaired(hubId,commentId);
-      allow update, delete: if false;
+      allow update: if false;
+      allow delete: if request.auth != null &&
+        request.auth.token.firebase.sign_in_provider == 'password' &&
+        request.auth.token.get('feedbackModerator', false) == true;
     }
     match /teacherHubFeedbackWriters/{uid} {
       allow get: if feedbackAnonymous() && request.auth.uid == uid;
       allow list, delete: if false;
       allow create: if feedbackAnonymous() && request.auth.uid == uid && validFeedbackWriter(request.resource.data);
       allow update: if feedbackAnonymous() && request.auth.uid == uid && validFeedbackWriter(request.resource.data) &&
-        request.time - resource.data.updatedAt >= duration.value(60, 's');
+        request.time - resource.data.updatedAt >= duration.value(5, 's');
     }
     match /teacherHubFeedbackQuota/global {
       allow get: if feedbackAnonymous();

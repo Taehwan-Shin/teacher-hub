@@ -53,7 +53,16 @@ try{
  const full=(await getDoc(quota(a))).data().windowStart;
  await no(commit(context('synthetic-c'),'synthetic-c',{count:101,windowStart:full}));
  await no(commit(context('synthetic-c'),'synthetic-c',{count:1}));
- await env.withSecurityRulesDisabled(async c=>{await updateDoc(quota(c.firestore()),{windowStart:Timestamp.fromMillis(Date.now()-3601000)});await updateDoc(writer(c.firestore(),'synthetic-a'),{updatedAt:Timestamp.fromMillis(Date.now()-61000)});});
+ await env.withSecurityRulesDisabled(async c=>{await updateDoc(quota(c.firestore()),{windowStart:Timestamp.fromMillis(Date.now()-3601000)});await updateDoc(writer(c.firestore(),'synthetic-a'),{updatedAt:Timestamp.fromMillis(Date.now()-6000)});});
  await yes(commit(a,'synthetic-a'));
+ const moderator=env.authenticatedContext('synthetic-moderator',{firebase:{sign_in_provider:'password'},feedbackModerator:true}).firestore();
+ const regularPassword=env.authenticatedContext('synthetic-password',{firebase:{sign_in_provider:'password'}}).firestore();
+ const wrongProvider=env.authenticatedContext('synthetic-moderator',{firebase:{sign_in_provider:'anonymous'},feedbackModerator:true}).firestore();
+ await no(deleteDoc(comment(regularPassword,id)));await no(deleteDoc(comment(wrongProvider,id)));
+ await no(updateDoc(comment(moderator,id),{body:'변경 시도'}));
+ await no(getDoc(doc(moderator,'diaryVaults','synthetic-owner')));
+ await no(getDoc(quota(moderator)));await no(getDocs(collection(moderator,'teacherHubRequests')));
+ await no(deleteDoc(writer(moderator,'synthetic-a')));
+ await yes(deleteDoc(comment(moderator,id)));
  console.log(`PASS: ${passed} feedback authorization and abuse checks`);
 }finally{await env.cleanup();}

@@ -46,11 +46,11 @@ site/는 HTML·CSS·JavaScript와 직접 그린 SVG입니다. data/hubs.json은 
 
 ## 공개 피드백
 
-카드 아래 **피드백 남기기 · 보기**를 누르면 로그인 화면 없이 익명으로 작성하고 즉시 공개합니다. 2~500자, 익명 연결당 1분에 한 번, 전체 댓글 영역에서 시간당 최대 100개입니다. 최근 20개를 표시하고 이전 댓글을 더 불러올 수 있습니다. 다른 사람의 최신 의견은 새로고침으로 확인합니다.
+카드 아래 **피드백 남기기 · 보기**를 누르면 로그인 화면 없이 익명으로 작성하고 즉시 공개합니다. 2~500자, 익명 연결당 5초에 한 번, 전체 댓글 영역에서 시간당 최대 100개입니다. 최근 20개를 표시하고 이전 댓글을 더 불러올 수 있습니다. 다른 사람의 최신 의견은 새로고침으로 확인합니다.
 
 기존 일기장의 Firebase 프로젝트 `classroom-diary-098bae6e`에 분리된 댓글 컬렉션을 사용합니다. 공개 댓글에는 본문·서버 시각만 저장하며 이름·이메일·작성자 UID는 넣지 않습니다. 익명 연결 정보는 브라우저 메모리에만 남깁니다. 이메일·전화번호 등의 대표 패턴을 거부하지만 모든 자연어 개인정보를 자동으로 감지할 수는 없습니다.
 
-운영자는 [Firebase 댓글 데이터](https://console.firebase.google.com/project/classroom-diary-098bae6e/firestore/databases/-default-/data)에서 `teacherHubFeedback → 해당 issue-N → comments`의 문제 댓글 문서를 삭제합니다. 일반 방문자는 댓글을 수정·삭제할 수 없습니다. 신고 링크는 해당 허브의 등록 Issue로 연결됩니다. 신고에는 댓글 시각을 적고 개인정보가 담긴 원문을 재게시하지 마세요.
+댓글 아래 **삭제**를 누르고 공용 삭제 비밀번호를 입력하면 삭제할 수 있습니다. 이 비밀번호를 아는 사람은 누구나 모든 허브의 댓글을 삭제할 수 있으며 사이트에서 복구할 수 없습니다. 비밀번호는 Firebase 인증에서 검증하고 공개 코드에는 저장하지 않습니다. 운영자는 [Firebase 댓글 데이터](https://console.firebase.google.com/project/classroom-diary-098bae6e/firestore/databases/-default-/data)에서도 해당 댓글 문서만 삭제할 수 있습니다. 신고에는 댓글 시각을 적고 개인정보가 담긴 원문을 재게시하지 마세요.
 
 일기장과 댓글의 전체 보안 규칙은 [backend/firestore.rules](backend/firestore.rules)에 보관합니다. 규칙 배포는 전체 교체이므로 일기장 규칙을 제거하거나 예전 규칙으로 덮어쓰지 마세요. 운영 한계·배포 안내는 [backend/README.md](backend/README.md)에 있습니다.
 

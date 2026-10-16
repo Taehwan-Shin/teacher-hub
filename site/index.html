@@ -47,13 +47,23 @@
     <form id="feedback-form">
       <label for="feedback-body">이 허브를 사용해 본 의견을 나눠주세요.</label>
       <textarea id="feedback-body" rows="4" minlength="2" maxlength="500" placeholder="도움이 된 점이나 개선하면 좋을 점을 적어주세요." required aria-describedby="feedback-form-hint"></textarea>
-      <div class="feedback-form-bottom"><span id="feedback-form-hint">2~500자 · 1분에 한 번 작성</span><button id="feedback-submit" type="submit">피드백 남기기</button></div>
+      <div class="feedback-form-bottom"><span id="feedback-form-hint">2~500자 · 5초에 한 번 작성</span><button id="feedback-submit" type="submit">피드백 남기기</button></div>
     </form>
     <p id="feedback-status" role="status" aria-live="polite"></p>
     <div class="feedback-list-heading"><h3>함께 나눈 의견</h3><button id="feedback-refresh" type="button">새로고침</button></div>
     <div id="feedback-list" class="feedback-list"></div>
     <button id="feedback-more" class="feedback-more" type="button" hidden>이전 댓글 더 보기</button>
     <p class="feedback-report">부적절한 댓글은 <a id="feedback-report-link" target="_blank" rel="noopener noreferrer">운영자에게 신고</a>할 수 있습니다. 신고에는 댓글 시각만 적고 개인정보가 담긴 내용을 다시 게시하지 마세요.</p>
+  </dialog>
+  <dialog id="feedback-delete-dialog" class="feedback-dialog feedback-delete-dialog" aria-labelledby="feedback-delete-title">
+    <h2 id="feedback-delete-title">댓글 삭제</h2>
+    <p>삭제 비밀번호를 입력하면 이 댓글을 삭제합니다. 삭제한 댓글은 복구할 수 없습니다.</p>
+    <form id="feedback-delete-form">
+      <label for="feedback-delete-password">삭제 비밀번호</label>
+      <input id="feedback-delete-password" type="password" minlength="6" maxlength="128" required autocomplete="off" spellcheck="false">
+      <p id="feedback-delete-status" role="status" aria-live="polite"></p>
+      <div class="feedback-delete-actions"><button id="feedback-delete-cancel" type="button">취소</button><button id="feedback-delete-confirm" type="submit">삭제하기</button></div>
+    </form>
   </dialog>
 </body>
 </html>

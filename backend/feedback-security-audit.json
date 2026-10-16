@@ -1,0 +1,18 @@
+{
+  "score": 3,
+  "summary": "Rules restrict deletion to the password-provider moderator claim and preserve diary/intake isolation. The user explicitly chose a low-entropy shared password; this is not individual administrator authentication.",
+  "findings": [
+    {
+      "check": "Authority Source",
+      "severity": "moderate",
+      "issue": "Anyone who knows or guesses the shared credential can delete public feedback; attribution and recovery are not provided. This behavior was explicitly requested after the risk was explained.",
+      "recommendation": "Rotate the shared credential when exposed, or migrate to individually authenticated moderators. Never embed it in public files."
+    },
+    {
+      "check": "Admin Bootstrapping & Privileges",
+      "severity": "moderate",
+      "issue": "The Firebase password identity retains standard self-account management capabilities outside Firestore rules, allowing a credential holder to disrupt shared authentication.",
+      "recommendation": "Restore or disable the dedicated identity through Firebase administration when necessary; deny comment deletes in rules for immediate revocation."
+    }
+  ]
+}

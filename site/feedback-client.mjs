@@ -46,7 +46,7 @@ export async function submitFeedback(hubId,value){
   const name=`${nameBase}/teacherHubFeedback/${hubId}/comments/${id}`;
   for(let attempt=0;attempt<3;attempt++){
     const [quota,throttle]=await Promise.all([json(`${base}/teacherHubFeedbackQuota/global`,{token:s.token,missing:true}),json(`${base}/teacherHubFeedbackWriters/${s.uid}`,{token:s.token,missing:true})]);
-    if(throttle&&Date.now()-Date.parse(throttle.fields.updatedAt.timestampValue)<60000)throw failure('cooldown');
+    if(throttle&&Date.now()-Date.parse(throttle.fields.updatedAt.timestampValue)<5000)throw failure('cooldown');
     // Compare-and-swap preconditions protect both counters from concurrent overwrite.
     const recent=quota&&Date.now()-Date.parse(quota.fields.windowStart.timestampValue)<3600000;
     const count=recent?Number(quota.fields.count.integerValue)+1:1;
@@ -66,4 +66,19 @@ export async function submitFeedback(hubId,value){
       if(error.code==='network'){try{const check=await json(`https://firestore.googleapis.com/v1/${name}`,{missing:true});if(check)return {id,name};}catch{}throw failure('uncertain');}throw error;}
   }
   throw failure('conflict');
+}
+
+// Deletion uses a separate Firebase password identity, never the posting session.
+// The password is entered for each deletion and is never persisted or bundled.
+export async function deleteFeedback(hubId,name,password){
+  if(!validHubId(hubId)||typeof password!=='string'||password.length<6||password.length>128)throw failure('delete-auth');
+  const c=await config();
+  const prefix=`projects/${c.projectId}/databases/(default)/documents/teacherHubFeedback/${hubId}/comments/`;
+  if(typeof name!=='string'||!name.startsWith(prefix)||!/^[a-f0-9-]{36}$/.test(name.slice(prefix.length)))throw failure('hub');
+  let moderator;
+  try{moderator=await json(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${encodeURIComponent(c.apiKey)}`,{method:'POST',body:{email:'feedback-moderator@teacher-hub.invalid',password,returnSecureToken:true}});}
+  catch(error){throw failure(error.code==='quota'?'quota':error.code==='network'?'network':'delete-auth');}
+  if(typeof moderator.idToken!=='string')throw failure('delete-auth');
+  try{await json(`https://firestore.googleapis.com/v1/${name}`,{method:'DELETE',token:moderator.idToken});}
+  catch(error){if(error.code==='network'){try{if(!await json(`https://firestore.googleapis.com/v1/${name}`,{missing:true}))return;}catch{}throw failure('delete-uncertain');}throw error;}
 }

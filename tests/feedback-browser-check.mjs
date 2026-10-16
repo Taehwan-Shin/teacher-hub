@@ -30,7 +30,7 @@ try{
  await page.locator('#feedback-body').fill('직접 사용해 보니 수업에 활용하기 편리했습니다.');await page.locator('#feedback-submit').click();await page.waitForFunction(()=>document.querySelector('#feedback-status').textContent.includes('공개되었습니다'));
  assert.equal(commitRead,2);assert.equal(signup,1);assert.equal(await page.locator('#feedback-body').inputValue(),'');
  await page.waitForFunction(()=>document.querySelectorAll('.feedback-entry').length===1);
- await page.locator('#feedback-body').fill('추가 의견입니다.');await page.locator('#feedback-submit').click();await page.waitForFunction(()=>document.querySelector('#feedback-status').textContent.includes('1분'));
+ await page.locator('#feedback-body').fill('추가 의견입니다.');await page.locator('#feedback-submit').click();await page.waitForFunction(()=>document.querySelector('#feedback-status').textContent.includes('5초'));
  assert.equal(await page.locator('#feedback-body').inputValue(),'추가 의견입니다.');assert.equal(commitRead,2);
  await page.keyboard.press('Escape');assert.equal(await page.locator('#feedback-dialog').evaluate(e=>e.open),false);
  await page.setViewportSize({width:320,height:780});await page.locator('.feedback-open').first().click();
