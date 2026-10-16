@@ -7,5 +7,14 @@
     "category": "수업 도구",
     "symbol": "sun",
     "issue": 1
+  },
+  {
+    "id": "issue-3",
+    "title": "책별 · 배움의 허브",
+    "description": "도서 추천, PDF 글자 수 세기, 역사 학습 게임, 구글 로그인 일기장을 한곳에서 이용하는 교육용 웹앱 허브입니다.",
+    "url": "https://dewry52-dev.github.io/codex/",
+    "category": "종합 허브",
+    "symbol": "book",
+    "issue": 3
   }
 ]
