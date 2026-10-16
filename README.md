@@ -31,8 +31,8 @@ GitHub Actions의 **등록 접수 처리**가 약 10분 간격으로 대기 신�
 Node.js 24 이상에서 설치 없이 실행합니다.
 
 ```powershell
-node --test tests/*.test.mjs
 node scripts/build.mjs
+node --test tests/*.test.mjs
 node scripts/serve.mjs
 ```
 

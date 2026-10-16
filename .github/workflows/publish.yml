@@ -60,8 +60,8 @@ jobs:
           persist-credentials: false
       - name: 보안 검사와 정적 데이터 빌드
         run: |
-          node --test tests/*.test.mjs
           node scripts/build.mjs
+          node --test tests/*.test.mjs
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: site
