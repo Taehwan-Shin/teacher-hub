@@ -106,5 +106,14 @@
     "category": "수업 도구",
     "symbol": "sun",
     "issue": 9
+  },
+  {
+    "id": "issue-15",
+    "title": "온빛",
+    "description": "랜덤 발표 뽑기, PDF 글자 수 세기, 역사 인물 학습, 수학 게임과 일기장을 한곳에서 연결하는 교실 웹앱 허브입니다.",
+    "url": "https://ch890233-create.github.io/onbit/",
+    "category": "종합 허브",
+    "symbol": "sun",
+    "issue": 15
   }
 ]
