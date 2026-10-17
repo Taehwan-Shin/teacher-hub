@@ -97,5 +97,14 @@
     "category": "종합 허브",
     "symbol": "star",
     "issue": 10
+  },
+  {
+    "id": "issue-9",
+    "title": "허브 이름을 입력하세요",
+    "description": "공개 소개를 160자 이내로 입력하세요",
+    "url": "https://sample.github.io/tools/",
+    "category": "수업 도구",
+    "symbol": "sun",
+    "issue": 9
   }
 ]
