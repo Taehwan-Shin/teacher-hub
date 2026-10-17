@@ -61,5 +61,14 @@
     "category": "교과 학습",
     "symbol": "book",
     "issue": 8
+  },
+  {
+    "id": "issue-13",
+    "title": "자동 등록 검증용 임시 허브",
+    "description": "합성 데이터로 자동 게시를 확인한 후 제거합니다.",
+    "url": "https://taehwan-shin.github.io/teacher-hub/",
+    "category": "수업 도구",
+    "symbol": "star",
+    "issue": 13
   }
 ]
