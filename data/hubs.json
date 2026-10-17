@@ -70,5 +70,14 @@
     "category": "수업 도구",
     "symbol": "star",
     "issue": 13
+  },
+  {
+    "id": "issue-12",
+    "title": "교실 도구함",
+    "description": "말놀이 국어 미니게임, 일기장, 교실 타이머·스톱워치·현재 시각, PDF 글자 수 도구를 한곳에서 여는 교실용 웹앱 허브입니다.",
+    "url": "https://fromjosu-bit.github.io/teaching-web-apps/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 12
   }
 ]
