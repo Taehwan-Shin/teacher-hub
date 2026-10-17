@@ -25,5 +25,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 4
+  },
+  {
+    "id": "issue-5",
+    "title": "교실 도구함",
+    "description": "교사를 위한 자리 바꾸기, PDF 글자 수 세기, 생활기록부 개인정보 가리기 도구",
+    "url": "https://naro21662-sys.github.io/classroom-toolbox/",
+    "category": "학급 운영",
+    "symbol": "compass",
+    "issue": 5
   }
 ]
