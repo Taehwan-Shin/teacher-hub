@@ -52,5 +52,14 @@
     "category": "수업 도구",
     "symbol": "sun",
     "issue": 6
+  },
+  {
+    "id": "issue-8",
+    "title": "수학 수업 허브",
+    "description": "교실에서 함께 발견하는 수학. 일차·이차함수 그래프 탐구와 나만의 수업 도구 모음.",
+    "url": "https://msuk1215-oss.github.io/math-hub/",
+    "category": "교과 학습",
+    "symbol": "book",
+    "issue": 8
   }
 ]
