@@ -4,3 +4,22 @@ qa/
 .local/
 node_modules/
 *.log
+
+# Private configuration, credentials and local exports are never published.
+.env
+.env.*
+!.env.example
+.firebase/
+.vercel/
+.openai/
+*.pem
+*.key
+*.p12
+*.pfx
+*service-account*.json
+*serviceAccount*.json
+firebase-adminsdk*.json
+*.bak
+*.backup
+*.tmp
+tmp/
