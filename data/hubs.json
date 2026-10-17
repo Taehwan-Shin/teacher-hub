@@ -79,5 +79,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 12
+  },
+  {
+    "id": "issue-11",
+    "title": "수업 도구",
+    "description": "교실에서 바로 쓰는 수학 연습과 PDF 글자 수 세기 도구를 모은 교사용 웹앱 허브입니다.",
+    "url": "https://dayoonavy.github.io/classroom-tool-hub/",
+    "category": "수업 도구",
+    "symbol": "star",
+    "issue": 11
   }
 ]
