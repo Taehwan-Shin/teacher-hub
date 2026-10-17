@@ -16,5 +16,14 @@
     "category": "종합 허브",
     "symbol": "book",
     "issue": 3
+  },
+  {
+    "id": "issue-4",
+    "title": "수학 수업 허브 · Math Atelier",
+    "description": "타이머, 무작위 번호 뽑기, 모둠 편성, 확률 실험, 좌표·함수 그래프와 수학 게임, PDF 글자 수 도구를 한곳에 모은 교실 수업 허브입니다.",
+    "url": "https://insangbooks.github.io/math-class-hub/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 4
   }
 ]
