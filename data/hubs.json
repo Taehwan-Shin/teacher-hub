@@ -88,5 +88,14 @@
     "category": "수업 도구",
     "symbol": "star",
     "issue": 11
+  },
+  {
+    "id": "issue-10",
+    "title": "배움 팝! · 우리들의 학습 놀이터",
+    "description": "약수·배수와 곱셈·나눗셈 학습 게임, 일기장, PDF 글자 수 도구를 모은 학습·교실 도구 허브입니다.",
+    "url": "https://dewry52-dev.github.io/learning-playground/",
+    "category": "종합 허브",
+    "symbol": "star",
+    "issue": 10
   }
 ]
