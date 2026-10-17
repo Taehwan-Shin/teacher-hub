@@ -35,7 +35,7 @@ export async function submitHub(input){
    {update:{name:`${nameBase}/teacherHubRequestWriters/${session.localId}`,fields:{requestId:s(id)}},currentDocument:pre(writer),updateTransforms:[stamp('updatedAt')]},
    {update:{name:`${nameBase}/teacherHubRequestQuota/global`,fields:quotaFields},currentDocument:pre(quota),updateTransforms:[stamp('updatedAt'),...(hourFresh?[stamp('hourStart')]:[]),...(dayFresh?[stamp('dayStart')]:[])]}
   ];
-  try{await request(`${BASE}:commit`,{token:session.idToken,body:{writes}});return {receipt:id,state:'queued',message:'접수 완료. 주기 실행 후 GitHub Issue가 생성됩니다. 운영자 승인 전에는 카드가 게시되지 않습니다.'};}
+  try{await request(`${BASE}:commit`,{token:session.idToken,body:{writes}});return {receipt:id,state:'queued',message:'접수 완료. 주기 실행 후 GitHub Issue가 생성됩니다. 자동 승인 및 카드 게시까지 처리되며 시간이 걸릴 수 있습니다.'};}
   catch(error){const check=await request(`https://firestore.googleapis.com/v1/${name}`,auth).catch(()=>null);if(check)return {receipt:id,state:check.fields.state.stringValue,message:'접수 확인 완료'};if((error.status===409||error.status===412)&&attempt<2)continue;throw error;}
  }
 }

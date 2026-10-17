@@ -16,13 +16,13 @@
 
 별도 합성 Firebase 계정의 `hubRegistrar:true` custom claim은 관리자 API로만 설정했다. 이 계정은 요청 목록(최대 20개), 처리 상태·Issue 번호·처리 시각만 변경하고 처리 7일 이후 원본을 삭제한다. 본문·작성자·생성 시각 변경, 일기장 접근, 댓글 쓰기용 제한 문서 접근은 금지한다. Google IAM 권한·관리자 키를 부여하지 않았다. 갱신 토큰은 메모리에서 Libsodium sealed box로 암호화해 GitHub Actions `INTAKE_REFRESH_TOKEN` Secret에 저장했다. 평문 파일·공개 코드·로그에 저장하지 않았다.
 
-GitHub 인증은 실행마다 발급되는 `GITHUB_TOKEN`의 contents:read/issues:write만 사용한다. 개인 GitHub 토큰을 서버에 저장하지 않는다. 신청 텍스트·URL을 shell에 삽입하거나 실행하지 않고 본문은 다섯 필드의 JSON 코드 블록 하나로 만든다. 운영자 승인·코드 변경·게시 권한은 접수 workflow에 없다. 접수 UUID를 제목에 넣어 중단 후 재실행에서도 기존 Issue를 찾으며, 같은 공개 URL의 열린 신청·게시 허브는 기존 Issue로 연결한다. 임의의 허브 주소를 서버에서 fetch하지 않는다.
+GitHub 인증은 실행마다 발급되는 `GITHUB_TOKEN`의 contents:read/issues:write만 사용한다. 개인 GitHub 토큰을 서버에 저장하지 않는다. 신청 텍스트·URL을 shell에 삽입하거나 실행하지 않고 본문은 다섯 필드의 JSON 코드 블록 하나로 만든다. Firebase 접수 작업에는 코드 변경·게시 권한이 없다. 별도 자동 등록 작업에 contents:write/issues:write를, 게시 작업에 pages:write/id-token:write를 부여한다. main의 신뢰된 코드만 실행하며 신청 본문을 실행하지 않는다. 접수 UUID를 제목에 넣어 중단 후 재실행에서도 기존 Issue를 찾으며, 다른 접수 번호라면 같은 공개 URL도 별도 Issue와 카드로 등록한다. 임의의 허브 주소를 서버에서 fetch하지 않는다.
 
-쿼리: state==queued, limit10; 처리 시각이 1970년보다 크고 7일보다 오래된 문서 limit20. 모두 단일 필드 인덱스로 실행한다. 처음부터 처리된 문서만 정리하므로 대기 접수는 보존한다. 익명 Auth 계정·작성 제한 문서는 자동 삭제하지 않으며 일기장·댓글과 무료 사용량을 공유한다. 실제 자연어 개인정보를 모두 탐지하지 못하므로 공개 정보만 제출하도록 안내하고 운영자가 검토한다.
+쿼리: state==queued, limit10; 처리 시각이 1970년보다 크고 7일보다 오래된 문서 limit20. 모두 단일 필드 인덱스로 실행한다. 처음부터 처리된 문서만 정리하므로 대기 접수는 보존한다. 익명 Auth 계정·작성 제한 문서는 자동 삭제하지 않으며 일기장·댓글과 무료 사용량을 공유한다. 실제 자연어 개인정보를 모두 탐지하지 못하므로 공개 정보만 제출하도록 안내한다. 운영자 사전 검토는 수행하지 않는다.
 
 예약 실행은 분 7·17·27·37·47·57에 요청하지만 GitHub가 실행을 지연·누락하거나 장기 비활동으로 중지할 수 있다. 운영자는 Actions에서 실행 상태를 확인하고 수동 실행할 수 있다. 처리 오류는 접수를 보존하며 개인정보 없는 일반 오류로 알린다. 공개 GitHub Issue와 Git 이력은 접수 원본을 지워도 남는다.
 
-중단: `등록 접수 처리` workflow를 비활성화하고 접수 create를 거부한다. 일기장·댓글 규칙은 보존한다. 인증 교체: 기존 처리 계정의 custom claim 제거·계정 비활성화 후 새 전용 계정에 claim을 부여하고 Secret을 교체한다. 해당 계정의 ID token은 만료까지 유효할 수 있어 긴급 차단은 규칙의 worker 권한도 함께 거부한다. 프로젝트 전체 Auth나 Google 로그인을 끄지 않는다.
+중단: `등록 접수와 자동 게시` workflow를 비활성화하고 접수 create를 거부한다. 일기장·댓글 규칙은 보존한다. 인증 교체: 기존 처리 계정의 custom claim 제거·계정 비활성화 후 새 전용 계정에 claim을 부여하고 Secret을 교체한다. 해당 계정의 ID token은 만료까지 유효할 수 있어 긴급 차단은 규칙의 worker 권한도 함께 거부한다. 프로젝트 전체 Auth나 Google 로그인을 끄지 않는다.
 
 프로젝트 `classroom-diary-098bae6e`, `(default)` Standard Native Firestore, 서울 `asia-northeast3`를 기존 암호화 일기장과 공유한다. 화면은 GitHub Pages로 게시한다. Firebase Hosting 변경·유료 전환·Cloud Functions·추가 DB 생성은 수행하지 않았다.
 

@@ -12,7 +12,7 @@ const prompt = `현재 프로젝트의 웹앱 허브를 ‘교사의 별자리�
 개인정보·학생 정보·비공개 주소·인증 정보는 제외하고 공개할 허브 정보만 전송해줘.
 정보가 준비되어 있으면 안내의 공개 접수 클라이언트 코드를 확인한 뒤 임시 폴더에서 실행해 Firebase에 신청을 접수해줘. 이 프롬프트는 해당 공개 정보의 등록 신청 전송을 허용한다.
 GitHub 연결 앱으로 Issue를 직접 생성하지 말고, 프로젝트 소스·저장소 파일·승인 라벨을 변경하지 마.
-접수 번호와 추적 링크를 알려줘. 접수 후 GitHub Actions가 주기적으로 Issue를 만들고 운영자가 승인하면 카드가 게시된다는 점을 안내해줘. 오류가 나면 성공했다고 말하거나 접수를 반복하지 말고 원인과 접수 번호를 알려줘.`;
+접수 번호와 추적 링크를 알려줘. 접수 후 GitHub Actions가 주기적으로 Issue를 만들고 자동 승인과 게시까지 처리한다는 점을 안내해줘. 오류가 나면 성공했다고 말하거나 접수를 반복하지 말고 원인과 접수 번호를 알려줘.`;
 byId('prompt').textContent = prompt;
 byId('copy-prompt').addEventListener('click', async () => {
   try { await Promise.race([navigator.clipboard.writeText(prompt),new Promise((_,reject)=>setTimeout(()=>reject(new Error('timeout')),3000))]); byId('copy-status').textContent='복사했습니다. 웹앱 허브 프로젝트의 Codex에 붙여넣으세요.'; }

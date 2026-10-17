@@ -25,7 +25,8 @@ try{
   check('reduced motion disables rotation',await page.locator('.hub-card:not(.invitation)').first().evaluate(e=>getComputedStyle(e).transform==='none'));
   await page.emulateMedia({reducedMotion:'no-preference'});
   await page.locator('#search').fill('찾을수없는합성문구');check('empty search explained',await page.locator('#empty').isVisible());
-  await page.locator('#search').fill('');await page.getByRole('button',{name:'교과 학습',exact:true}).click();check('category filters working',await page.locator('#empty').isVisible());
+  const realRows=await (await page.request.get(new URL('hubs.json',base).href)).json();
+  await page.locator('#search').fill('');await page.getByRole('button',{name:'교과 학습',exact:true}).click();check('category filters working',await page.locator('.hub-card:not(.invitation)').count()===realRows.filter(h=>h.category==='교과 학습').length);
   await page.getByRole('button',{name:'전체',exact:true}).click();
   for(const [width,columns] of [[1100,4],[850,3],[390,2],[360,1]]){await page.setViewportSize({width,height:900});check(`responsive ${width}px ${columns} columns`,await page.locator('.card-grid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length)===columns);check(`no horizontal overflow ${width}px`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
   await page.setViewportSize({width:390,height:900});await screenshot('mobile');

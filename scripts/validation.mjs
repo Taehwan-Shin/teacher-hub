@@ -32,14 +32,13 @@ export function parseBody(body) {
 }
 export function validateRegistry(rows) {
   if (!Array.isArray(rows) || rows.length > 2000) throw new Error('등록 목록 크기가 올바르지 않습니다.');
-  const urls = new Set(), ids = new Set(), issues = new Set();
+  const ids = new Set(), issues = new Set();
   for (const row of rows) {
     if (Object.keys(row).sort().join(',') !== 'category,description,id,issue,symbol,title,url') throw new Error('등록 목록 항목이 올바르지 않습니다.');
     validateHub(Object.fromEntries(['title', 'description', 'url', 'category', 'symbol'].map(k => [k, row[k]])));
     if (!/^[a-z0-9-]{1,80}$/.test(row.id) || (row.issue !== null && (!Number.isSafeInteger(row.issue) || row.issue < 1))) throw new Error('등록 식별자가 올바르지 않습니다.');
-    const key = publicURL(row.url).replace(/\/$/, '').toLowerCase();
-    if (urls.has(key) || ids.has(row.id) || (row.issue !== null && issues.has(row.issue))) throw new Error('중복 허브가 있습니다.');
-    urls.add(key); ids.add(row.id); if (row.issue !== null) issues.add(row.issue);
+    if (ids.has(row.id) || (row.issue !== null && issues.has(row.issue))) throw new Error('중복 등록 식별자가 있습니다.');
+    ids.add(row.id); if (row.issue !== null) issues.add(row.issue);
   }
   return rows;
 }

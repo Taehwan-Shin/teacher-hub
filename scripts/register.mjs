@@ -28,7 +28,7 @@ try {
   console.log('승인된 스냅샷 반영 완료');
 } catch (error) {
   // No issue body, URL, account profile or credentials in logs.
-  console.error(error.message.startsWith('GitHub API') ? error.message : '등록 검사 실패. 권한·신청 형식·중복·수정 여부를 확인하세요.');
-  await appendFile(process.env.GITHUB_STEP_SUMMARY, '등록되지 않았습니다. 신청 형식·개인정보·중복 주소·수정 여부를 확인하고 승인 라벨을 제거한 뒤 다시 붙이세요.\n');
+  console.error(error.message.startsWith('GitHub API') ? error.message : '등록 검사 실패. 권한·신청 형식·식별자·수정 여부를 확인하세요.');
+  await appendFile(process.env.GITHUB_STEP_SUMMARY, '등록되지 않았습니다. 신청 형식·개인정보·식별자·수정 여부를 확인하고 라벨을 제거한 뒤 다시 붙이세요.\n');
   process.exitCode = 1;
 }

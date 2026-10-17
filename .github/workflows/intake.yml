@@ -1,15 +1,17 @@
-name: 등록 접수 처리
+name: 등록 접수와 자동 게시
 on:
   schedule:
     - cron: '7,17,27,37,47,57 * * * *'
   workflow_dispatch:
+  issues:
+    types: [opened, reopened, edited]
 permissions: {}
 concurrency:
   group: registration-intake
   cancel-in-progress: false
 jobs:
   intake:
-    if: github.repository == 'Taehwan-Shin/teacher-hub' && github.ref == 'refs/heads/main'
+    if: github.repository == 'Taehwan-Shin/teacher-hub' && github.ref == 'refs/heads/main' && github.event_name != 'issues'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -27,3 +29,73 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           INTAKE_REFRESH_TOKEN: ${{ secrets.INTAKE_REFRESH_TOKEN }}
         run: node scripts/intake-worker.mjs
+
+  register:
+    needs: [intake]
+    if: always() && github.repository == 'Taehwan-Shin/teacher-hub' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      issues: write
+    outputs:
+      ready: ${{ steps.register.outputs.ready }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          persist-credentials: false
+      - name: 모든 등록 신청 자동 승인
+        id: register
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/automatic.mjs register
+
+  publish:
+    needs: [register]
+    if: always() && needs.register.result == 'success' && needs.register.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: pages-publication
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          persist-credentials: false
+      - name: 검사와 빌드
+        run: |
+          node scripts/build.mjs
+          node --test tests/*.test.mjs
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
+        with:
+          path: site
+      - name: GitHub Pages 게시
+        id: deploy
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
+
+  complete:
+    needs: [publish]
+    if: always() && needs.publish.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          persist-credentials: false
+      - name: 실제 공개 확인 후 완료 처리
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/automatic.mjs complete

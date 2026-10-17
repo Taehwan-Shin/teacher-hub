@@ -15,16 +15,15 @@ async function run(){
  const token=session.id_token,github=client(process.env.GH_TOKEN,process.env.GITHUB_REPOSITORY);
  const rows=await request(`${root}:runQuery`,{token,body:{structuredQuery:{from:[{collectionId:'teacherHubRequests'}],where:{fieldFilter:{field:{fieldPath:'state'},op:'EQUAL',value:{stringValue:'queued'}}},limit:10}}});
  const documents=rows.filter(x=>x.document).map(x=>x.document);
- let issues=[],registry=[];
+ let issues=[];
  if(documents.length){
-  const file=await github('/contents/data/hubs.json?ref=main');registry=JSON.parse(Buffer.from(file.content,'base64'));
   for(let page=1;page<=20;page++){const batch=await github(`/issues?state=all&per_page=100&page=${page}`);issues.push(...batch);if(batch.length<100)break;if(page===20)throw new Error('Issue history requires maintenance');}
  }
  let processed=0;
  for(const document of documents){
   let receipt;try{receipt=decodeRequest(document);}catch{}
   let issue=0,state='rejected';
-  if(receipt){issue=existingIssue(receipt,issues,registry)||0;
+  if(receipt){issue=existingIssue(receipt,issues)||0;
    if(!issue){const created=await github('/issues','POST',issuePayload(receipt));issue=created.number;issues.push(created);}
    state='issued';
   }
