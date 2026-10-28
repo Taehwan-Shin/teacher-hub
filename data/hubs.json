@@ -142,5 +142,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 18
+  },
+  {
+    "id": "issue-17",
+    "title": "하루 한 줄 · 우리 교실 웹앱 허브",
+    "description": "우리 교실의 웹앱과 일기 쓰기 도움말을 한곳에. 오늘의 일기 주제, 5분 쓰기 안내, 수업 타이머.",
+    "url": "https://lalalacongcongcong-jpg.github.io/BANG/",
+    "category": "종합 허브",
+    "symbol": "book",
+    "issue": 17
   }
 ]
