@@ -115,5 +115,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 16
+  },
+  {
+    "id": "issue-20",
+    "title": "나의 앱 서재",
+    "description": "수업 타이머, 번호 뽑기, 모둠 편성, 수업 순서판과 앱 링크 관리 기능을 한곳에 모은 교사용 웹앱 허브입니다.",
+    "url": "https://soylee1115-ui.github.io/soyoung/",
+    "category": "종합 허브",
+    "symbol": "book",
+    "issue": 20
   }
 ]
