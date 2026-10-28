@@ -106,5 +106,14 @@
     "category": "종합 허브",
     "symbol": "sun",
     "issue": 15
+  },
+  {
+    "id": "issue-16",
+    "title": "공통수학2 배움마루",
+    "description": "수업 타이머·발표자 추첨·모둠 편성·자리 배치·QR 만들기와 공통수학2 학습 도구를 모은 교사용 허브입니다. Google 계정으로 이용합니다.",
+    "url": "https://script.google.com/macros/s/AKfycbyRm-fGega-JabfhK0h1oS7N7MhfqGDcw78EZWmO5Apm4JVDUuRpj9M8NZuJ8OtubdX/exec",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 16
   }
 ]
