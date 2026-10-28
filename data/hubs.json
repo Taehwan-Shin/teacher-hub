@@ -124,5 +124,14 @@
     "category": "종합 허브",
     "symbol": "book",
     "issue": 20
+  },
+  {
+    "id": "issue-19",
+    "title": "작은 책상",
+    "description": "교사를 위한 안내문 서식, 업무 목록, 번호 기반 모둠 편성, 수업 타이머와 교실 알람, Google 로그인 개인 일기장을 한곳에 모은 웹앱 허브입니다.",
+    "url": "https://ehynlee-source.github.io/little-desk/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 19
   }
 ]
