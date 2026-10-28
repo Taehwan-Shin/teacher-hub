@@ -133,5 +133,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 19
+  },
+  {
+    "id": "issue-18",
+    "title": "교실 서랍",
+    "description": "쉬는시간 타이머, 학습·소통·놀이 웹앱과 일기장을 한곳에 모은 웹앱 허브입니다. 검색·분류·즐겨찾기와 웹앱 추가를 지원합니다.",
+    "url": "https://abcsj1-pixel.github.io/classroom-drawer/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 18
   }
 ]
