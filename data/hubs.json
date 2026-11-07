@@ -295,5 +295,14 @@
     "category": "종합 허브",
     "symbol": "book",
     "issue": 35
+  },
+  {
+    "id": "issue-34",
+    "title": "다름을 잇다",
+    "description": "장애이해 교육을 위한 교사 도구함입니다. 교실 참여 환경을 점검하고 다음 수업에서 실천할 일을 기록할 수 있습니다.",
+    "url": "https://heesunb73-byte.github.io/difference-hub/",
+    "category": "수업 도구",
+    "symbol": "book",
+    "issue": 34
   }
 ]
