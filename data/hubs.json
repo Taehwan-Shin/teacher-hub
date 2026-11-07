@@ -178,5 +178,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 28
+  },
+  {
+    "id": "issue-27",
+    "title": "다름을 잇다",
+    "description": "장애이해 교육을 위한 교사 도구함입니다. 함께하는 교실 체크리스트로 참여 장벽을 점검하고 실천 계획을 작성하며, 교육용 웹앱을 모아 관리합니다.",
+    "url": "https://difference-classroom-hub.hopefullaugh.chatgpt.site/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 27
   }
 ]
