@@ -367,5 +367,14 @@
     "category": "창작 활동",
     "symbol": "book",
     "issue": 48
+  },
+  {
+    "id": "issue-47",
+    "title": "웹앱 허브",
+    "description": "성인 심폐소생술 대응 순서와 가슴압박 박자를 연습할 수 있는 웹앱을 모은 허브입니다.",
+    "url": "https://ttoing9494-alt.github.io/web-app-hub/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 47
   }
 ]
