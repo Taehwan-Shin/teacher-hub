@@ -250,5 +250,14 @@
     "category": "교과 학습",
     "symbol": "book",
     "issue": 31
+  },
+  {
+    "id": "issue-32",
+    "title": "작은 앱 서랍",
+    "description": "바이브 코딩으로 만든 작은 웹앱 모음입니다. 첫 앱 '하루 일기장'은 기분과 하루를 기록하고, Google 로그인으로 여러 기기에서 이어 쓸 수 있어요.",
+    "url": "https://gkr402402-cpu.github.io/webapp-hub/",
+    "category": "종합 허브",
+    "symbol": "book",
+    "issue": 32
   }
 ]
