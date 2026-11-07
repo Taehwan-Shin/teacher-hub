@@ -349,5 +349,14 @@
     "category": "수업 도구",
     "symbol": "sun",
     "issue": 42
+  },
+  {
+    "id": "issue-49",
+    "title": "CPR 119 안전 허브",
+    "description": "성인 심폐소생술 대응 순서와 가슴압박 박자를 연습하는 응급처치 교육 허브입니다.",
+    "url": "https://ttoing9494-alt.github.io/web-app-hub/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 49
   }
 ]
