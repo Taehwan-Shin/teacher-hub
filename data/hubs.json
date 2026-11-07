@@ -196,5 +196,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 26
+  },
+  {
+    "id": "issue-25",
+    "title": "DAYFORM · 업무의 형태",
+    "description": "업무 도구를 한곳에 모으고 오늘의 할 일·마감일·우선순위를 관리하는 개인 업무효율화 허브. 로그인 없이 브라우저에 저장하며 백업과 복구를 지원합니다.",
+    "url": "https://dayform-work-hub.atom042810.chatgpt.site/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 25
   }
 ]
