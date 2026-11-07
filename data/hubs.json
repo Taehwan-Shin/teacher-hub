@@ -268,5 +268,14 @@
     "category": "종합 허브",
     "symbol": "book",
     "issue": 38
+  },
+  {
+    "id": "issue-37",
+    "title": "교실 다락",
+    "description": "교사용 웹앱 모음입니다. 수업 깊게 나눔 관찰지에서 수업을 선택해 네 문항을 기록하고, 참관록을 인쇄하거나 PDF로 저장할 수 있습니다.",
+    "url": "https://hnjim165-ops.github.io/gyosil-darak/",
+    "category": "종합 허브",
+    "symbol": "book",
+    "issue": 37
   }
 ]
