@@ -205,5 +205,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 25
+  },
+  {
+    "id": "issue-24",
+    "title": "교실 도구함",
+    "description": "수업에 필요한 웹앱을 한곳에 모아 검색하고 실행하는 허브입니다. 무작위 번호 뽑기와 개인 앱 목록·즐겨찾기·백업 기능을 제공합니다.",
+    "url": "https://classroom-toolbox-pick.woolly-goby-4546.chatgpt.site/",
+    "category": "종합 허브",
+    "symbol": "book",
+    "issue": 24
   }
 ]
