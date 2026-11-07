@@ -376,5 +376,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 47
+  },
+  {
+    "id": "issue-46",
+    "title": "작은 도구함",
+    "description": "교사의 일상과 수업을 위한 웹앱 허브입니다. Google 로그인으로 나만의 하루와 감정을 기록하는 Dayleaf 일기장을 제공합니다.",
+    "url": "https://little-toolbox-dcdcs-2026.web.app/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 46
   }
 ]
