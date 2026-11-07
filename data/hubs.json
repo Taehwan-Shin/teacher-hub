@@ -160,5 +160,14 @@
     "category": "종합 허브",
     "symbol": "book",
     "issue": 30
+  },
+  {
+    "id": "issue-29",
+    "title": "수업서랍",
+    "description": "수업 타이머와 직접 만든 수업 웹앱을 한곳에서 관리하는 교사용 도구 허브입니다. 로그인 없이 타이머를 사용하고 도구를 추가·검색·즐겨찾기할 수 있습니다.",
+    "url": "https://classroom-drawer-20261107.sdsgan2020.chatgpt.site/",
+    "category": "수업 도구",
+    "symbol": "book",
+    "issue": 29
   }
 ]
