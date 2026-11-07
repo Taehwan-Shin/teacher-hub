@@ -241,5 +241,14 @@
     "category": "종합 허브",
     "symbol": "book",
     "issue": 21
+  },
+  {
+    "id": "issue-31",
+    "title": "고전의 뜰",
+    "description": "조선후기 고전소설 수업을 위한 웹앱 허브. 춘향전·흥부전·허생전 탐구 퀴즈와 수업 프로그램을 한곳에서 만나보세요.",
+    "url": "https://gojeon-garden-20261107.bloomychar6.chatgpt.site/",
+    "category": "교과 학습",
+    "symbol": "book",
+    "issue": 31
   }
 ]
