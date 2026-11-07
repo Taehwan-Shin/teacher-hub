@@ -187,5 +187,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 27
+  },
+  {
+    "id": "issue-26",
+    "title": "건강 습관 허브",
+    "description": "앞으로 만들 웹앱을 모아 두고, 나의 건강 습관을 기록하는 개인 앱 허브입니다.",
+    "url": "https://health-habits-hub.vercel.app/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 26
   }
 ]
