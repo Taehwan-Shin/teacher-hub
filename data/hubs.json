@@ -394,5 +394,14 @@
     "category": "종합 허브",
     "symbol": "book",
     "issue": 45
+  },
+  {
+    "id": "issue-44",
+    "title": "루모스 특수교육 공방",
+    "description": "특수교육 교사를 위한 시각 일정판과 비공개 성찰 일기장을 모은 웹앱 공방입니다. 다양한 수업 도구를 한곳에서 관리합니다.",
+    "url": "https://rlghk33-asdf.github.io/lumos-special-education-hub/",
+    "category": "종합 허브",
+    "symbol": "book",
+    "issue": 44
   }
 ]
