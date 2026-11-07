@@ -286,5 +286,14 @@
     "category": "종합 허브",
     "symbol": "star",
     "issue": 36
+  },
+  {
+    "id": "issue-35",
+    "title": "포트폴리오 공작소",
+    "description": "학생 개인 포트폴리오를 주제로 만든 작은 웹앱 모음. 첫 앱은 작품·성장 기록을 모으는 포트폴리오예요.",
+    "url": "https://mjlouie0705.github.io/portfolio-hub/",
+    "category": "종합 허브",
+    "symbol": "book",
+    "issue": 35
   }
 ]
