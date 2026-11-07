@@ -358,5 +358,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 49
+  },
+  {
+    "id": "issue-48",
+    "title": "글빛 작업실",
+    "description": "초등 글쓰기와 AI 첨삭을 위한 교실 웹앱 모음. 주제 고르기부터 고쳐쓰기까지 돕는 '한 편 쓰기'와 기분·날씨를 담는 '마음 일기장'을 로그인 없이 바로 쓸 수 있어요.",
+    "url": "https://hjs7904.github.io/writing-hub/",
+    "category": "창작 활동",
+    "symbol": "book",
+    "issue": 48
   }
 ]
