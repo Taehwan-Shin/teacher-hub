@@ -304,5 +304,14 @@
     "category": "수업 도구",
     "symbol": "book",
     "issue": 34
+  },
+  {
+    "id": "issue-33",
+    "title": "마음이음",
+    "description": "학생 상담을 준비하는 교사를 위한 웹앱 허브. 상담 주제별 질문 추천 도구를 제공합니다.",
+    "url": "https://math304.github.io/maeum-ieum/",
+    "category": "학급 운영",
+    "symbol": "compass",
+    "issue": 33
   }
 ]
