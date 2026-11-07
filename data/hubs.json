@@ -277,5 +277,14 @@
     "category": "종합 허브",
     "symbol": "book",
     "issue": 37
+  },
+  {
+    "id": "issue-36",
+    "title": "작은 궤도",
+    "description": "바이브 코딩으로 만든 나만의 웹앱을 모으는 허브. 로그인 없이 기기에 기록하는 일기장부터 시작해 일상의 작은 도구들을 한곳에 담습니다.",
+    "url": "https://oocheboo9721-glitch.github.io/little-orbit-hub/",
+    "category": "종합 허브",
+    "symbol": "star",
+    "issue": 36
   }
 ]
