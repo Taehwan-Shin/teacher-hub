@@ -259,5 +259,14 @@
     "category": "종합 허브",
     "symbol": "book",
     "issue": 32
+  },
+  {
+    "id": "issue-38",
+    "title": "웹앱 허브",
+    "description": "직접 만든 웹앱 모음. 구글 로그인으로 나만 보는 일기장(달력·검색·기분 기록)을 쓸 수 있습니다.",
+    "url": "https://qlq7230-oss.github.io/webapp-hub/",
+    "category": "종합 허브",
+    "symbol": "book",
+    "issue": 38
   }
 ]
