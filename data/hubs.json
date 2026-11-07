@@ -403,5 +403,14 @@
     "category": "종합 허브",
     "symbol": "book",
     "issue": 44
+  },
+  {
+    "id": "issue-43",
+    "title": "말빛 실험실",
+    "description": "고등학생을 위한 사자성어 학습 허브. 상황 그림과 사자성어를 연결하고 풀이와 예문으로 복습합니다.",
+    "url": "https://jbr0912.github.io/malbit-lab/",
+    "category": "교과 학습",
+    "symbol": "book",
+    "issue": 43
   }
 ]
