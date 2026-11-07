@@ -385,5 +385,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 46
+  },
+  {
+    "id": "issue-45",
+    "title": "교무실 한눈에",
+    "description": "학교업무 체크리스트와 직접 만든 웹앱을 검색·즐겨찾기로 관리하는 교사용 도구 허브입니다.",
+    "url": "https://ymj0327-hash.github.io/ymj/",
+    "category": "종합 허브",
+    "symbol": "book",
+    "issue": 45
   }
 ]
