@@ -412,5 +412,14 @@
     "category": "교과 학습",
     "symbol": "book",
     "issue": 43
+  },
+  {
+    "id": "issue-50",
+    "title": "기술의 숲",
+    "description": "중학교 3학년 기술 수업을 위한 웹앱 허브입니다. 오늘의 실습 완료를 체크하고 날짜별 성장 기록을 브라우저에 저장합니다.",
+    "url": "https://1stmyworld.github.io/codex/",
+    "category": "수업 도구",
+    "symbol": "compass",
+    "issue": 50
   }
 ]
