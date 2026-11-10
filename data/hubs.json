@@ -421,5 +421,14 @@
     "category": "수업 도구",
     "symbol": "compass",
     "issue": 50
+  },
+  {
+    "id": "issue-51",
+    "title": "체육쌤 허브",
+    "description": "체육 수업 도구를 모은 교사용 허브입니다. 스포츠클럽 출석, 훈련일지와 피드백, 참여 포인트와 성장 순위를 관리합니다.",
+    "url": "https://givemepepsi-bot.github.io/teacher-pe-hub/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 51
   }
 ]
