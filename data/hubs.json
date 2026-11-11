@@ -430,5 +430,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 51
+  },
+  {
+    "id": "issue-52",
+    "title": "배움마루",
+    "description": "여행 초보를 위한 단계별 일본어 학습과 Google 로그인 개인 일기를 담은 도구 허브. 새로운 웹앱을 차곡차곡 추가합니다.",
+    "url": "https://920hub.github.io/baeumaru-learning-hub/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 52
   }
 ]
