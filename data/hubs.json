@@ -439,5 +439,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 52
+  },
+  {
+    "id": "issue-54",
+    "title": "교실 도구함",
+    "description": "학습 후 문제 카드를 직접 만들고 두 팀이 같은 화면에서 복습 보드게임을 즐기는 교실 도구 모음입니다.",
+    "url": "https://gyosil-tools-atelier.jochiwonmm35.chatgpt.site/",
+    "category": "수업 도구",
+    "symbol": "book",
+    "issue": 54
   }
 ]
