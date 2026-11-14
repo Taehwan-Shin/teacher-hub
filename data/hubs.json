@@ -457,5 +457,14 @@
     "category": "종합 허브",
     "symbol": "book",
     "issue": 53
+  },
+  {
+    "id": "issue-55",
+    "title": "선생님 업무 허브",
+    "description": "바이브코딩으로 만든 교사 업무용 웹앱을 모아 둔 허브입니다. 첫 번째 앱은 공지 기록·마감 관리·검색·전달 체크를 돕는 공지사항 관리 도구입니다.",
+    "url": "https://lv999geld.github.io/teacher-work-hub/",
+    "category": "종합 허브",
+    "symbol": "compass",
+    "issue": 55
   }
 ]
