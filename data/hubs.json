@@ -466,5 +466,14 @@
     "category": "종합 허브",
     "symbol": "compass",
     "issue": 55
+  },
+  {
+    "id": "issue-56",
+    "title": "컬처클럽",
+    "description": "초등 3–6학년을 위한 영어학습관. 세계문화 탐험과 영어·낱말 놀이, 일기장, 교실 수업 도구를 한곳에서 만나요.",
+    "url": "https://ina-seol.github.io/culture-club/",
+    "category": "종합 허브",
+    "symbol": "book",
+    "issue": 56
   }
 ]
