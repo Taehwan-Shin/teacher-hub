@@ -448,5 +448,14 @@
     "category": "수업 도구",
     "symbol": "book",
     "issue": 54
+  },
+  {
+    "id": "issue-53",
+    "title": "수업연구소",
+    "description": "한국사 선택형 시뮬레이션과 수업용 웹앱을 한곳에서 열고 개인 링크를 관리하는 허브입니다.",
+    "url": "https://sueop-lab-k-history.pujana7777.chatgpt.site/",
+    "category": "종합 허브",
+    "symbol": "book",
+    "issue": 53
   }
 ]
